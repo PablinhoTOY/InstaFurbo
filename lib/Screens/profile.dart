@@ -6,7 +6,7 @@ class ProfileScreen extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      child: Center(child: Text('Category')),
+      child: Center(child: Text('perfil')),
     );
   }
 }

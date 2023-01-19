@@ -6,7 +6,7 @@ class SetupScreen extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      child: Center(child: Text('Settings')),
+      child: Center(child: Text('subir multimedia')),
     );
   }
 }

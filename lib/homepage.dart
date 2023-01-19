@@ -29,11 +29,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('BottomNavigationBar')),
+      appBar: AppBar(title: Text('UnoFurbo', style: TextStyle(fontSize: 24))),
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
-        notchMargin: 8.0,
+        notchMargin: 6.0,
         clipBehavior: Clip.antiAlias,
         child: Container(
           height: kBottomNavigationBarHeight,
@@ -48,10 +48,12 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             child: BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
                 backgroundColor: Colors.black,
                 currentIndex: _currentIndex,
                 selectedItemColor: Colors.green,
                 unselectedItemColor: Colors.white,
+        
                 onTap: (index) {
                   setState(() {
                     _currentIndex = index;
@@ -60,12 +62,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 items: const <BottomNavigationBarItem>[
                   BottomNavigationBarItem(
                     icon: Icon(Icons.home),
-                    label: 'Category',
+                    label: 'Home',
                     backgroundColor: Colors.black,
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.search),
-                    label: 'Category',
+                    label: 'Buscar',
                     backgroundColor: Colors.black,
                   ),
                   BottomNavigationBarItem(
@@ -75,12 +77,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.chat),
-                    label: 'Category',
+                    label: 'Chat',
                     backgroundColor: Colors.black,
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.person),
-                    label: 'Setting',
+                    label: 'Perfil',
                     backgroundColor: Colors.black,
                   ),
                 ]),
