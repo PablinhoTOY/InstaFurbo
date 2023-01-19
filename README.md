@@ -1,6 +1,6 @@
 # insta_furbo
 
-A new Flutter project.
+Este branch es donde se harán las primeras pruebas de nuestro programa. 
 
 ## Getting Started
 

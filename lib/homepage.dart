@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
         notchMargin: 6.0,
         clipBehavior: Clip.antiAlias,
         child: Container(
-          height: kBottomNavigationBarHeight,
+          height: 62.5,
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
@@ -49,11 +49,14 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             child: BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,
+                iconSize: 28,
+                selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
                 backgroundColor: Colors.black,
                 currentIndex: _currentIndex,
                 selectedItemColor: Colors.green,
                 unselectedItemColor: Colors.white,
-        
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
                 onTap: (index) {
                   setState(() {
                     _currentIndex = index;
@@ -62,12 +65,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 items: const <BottomNavigationBarItem>[
                   BottomNavigationBarItem(
                     icon: Icon(Icons.home),
-                    label: 'Home',
+                    label: '',
                     backgroundColor: Colors.black,
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.search),
-                    label: 'Buscar',
+                    label: '',
                     backgroundColor: Colors.black,
                   ),
                   BottomNavigationBarItem(
@@ -77,12 +80,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.chat),
-                    label: 'Chat',
+                    label: '',
                     backgroundColor: Colors.black,
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.person),
-                    label: 'Perfil',
+                    label: '',
                     backgroundColor: Colors.black,
                   ),
                 ]),
@@ -94,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: _currentIndex == 2 ? Colors.green[300] : Colors.green,
         child:
-            Icon(Icons.sports_soccer_rounded, size: 54.0, color: Colors.black),
+            Icon(Icons.sports_soccer_rounded, size: 56.0, color: Colors.black),
         onPressed: () => setState(() {
           _currentIndex = 2;
         }),
