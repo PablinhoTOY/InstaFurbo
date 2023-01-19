@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: const MyHomePage(),
     );
@@ -28,81 +28,129 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
- 
-  int _counter = 0;
-  int _selectedIndex = 0;
-
-static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 3: Settings',
-      style: optionStyle,
-    ),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  int _currentIndex = 0;
+  List<Widget> _pages = [];
+  @override
+  void initState() {
+    _pages.add(HomeScreen());
+    _pages.add(SearchScreen());
+    _pages.add(SetupScreen());
+    _pages.add(ChatScreen());
+    _pages.add(ProfileScreen());
+    super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Onefootball-Instagram'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      appBar: AppBar(title: Text('BottomNavigationBar')),
+      body: _pages[_currentIndex],
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        notchMargin: 8.0,
+        clipBehavior: Clip.antiAlias,
+        child: Container(
+          height: kBottomNavigationBarHeight,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border(
+                top: BorderSide(
+                  color: Colors.grey,
+                  width: 0.5,
+                ),
+              ),
             ),
-          ],
+            child: BottomNavigationBar(
+                currentIndex: _currentIndex,
+                backgroundColor: Colors.black,
+                selectedItemColor: Colors.green,
+                unselectedItemColor: Colors.white,
+                onTap: (index) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+                items: const [
+                  BottomNavigationBarItem( 
+                      icon: Icon(Icons.home), label: 'Category'),
+                       BottomNavigationBarItem( 
+                      icon: Icon(Icons.home), label: 'Category'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.abc), label: ''),
+                       BottomNavigationBarItem( 
+                      icon: Icon(Icons.home), label: 'Category'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.message_outlined), label: 'Setting'),
+          
+                ]),
+          ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            backgroundColor: Colors.green
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
-    
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
-      
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-  
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: _currentIndex == 2 ? Colors.green[300] : Colors.green,
+          child: Icon(Icons.sports_soccer, size: 54.0, color: Colors.black),
+          onPressed: () => setState(() {
+            _currentIndex = 2;
+          }),
       ),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: Center(child: Text('Home')),
+    );
+  }
+}
+
+class SearchScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: Center(child: Text('Category')),
+    );
+  }
+}
+
+class SetupScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: Center(child: Text('Settings')),
+    );
+  }
+}
+
+class ProfileScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: Center(child: Text('Category')),
+    );
+  }
+}
+
+class ChatScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: Center(child: Text('Category')),
     );
   }
 }
