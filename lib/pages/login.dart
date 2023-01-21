@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../homepage.dart';
-
+import 'package:insta_furbo/Pages/register.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -143,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontWeight: FontWeight.bold,
                       fontSize: 30),
                 ),
-                onTap: () => {},
+                onTap: () => { Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterScreen(),))},
               ),
             ],
           ),
