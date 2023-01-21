@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../homepage.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -17,13 +18,17 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          color: Color.fromARGB(255, 54, 131, 57),
+          image: DecorationImage(
+            image: AssetImage('lib/Assets/img/cancha.png'),
+            fit: BoxFit.cover,
+          ),
         ),
         constraints: const BoxConstraints.expand(),
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Icon(Icons.sports_soccer, size: 100, color: Colors.white,),
               Text(
                 '¡Bienvenido!',
                 textAlign: TextAlign.center,
@@ -43,9 +48,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Colors.black,
                   ),
                   decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.symmetric(vertical: 12.5, horizontal: 20),
+                    icon: Icon(
+                      Icons.supervised_user_circle_rounded,
+                      color: Colors.white,
+                      size: 36,
+                    ),
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: 'login',
+                    hintText: 'Usuario',
                     hintStyle: TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
@@ -67,9 +78,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Colors.black,
                   ),
                   decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.symmetric(vertical: 12.5, horizontal: 20),
+                    icon: Icon(
+                      Icons.password,
+                      color: Colors.white,
+                      size: 36,
+                    ),
                     filled: true,
                     fillColor: Colors.white,
-                    hintText: 'password',
+                    hintText: 'Contraseña',
                     hintStyle: TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
@@ -93,7 +110,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
                     )),
-                onPressed: () async {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MyHomePage()));
+                },
                 child: const Padding(
                   padding: EdgeInsets.symmetric(
                     vertical: 10.0,
