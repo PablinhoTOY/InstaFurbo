@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:insta_furbo/homepage.dart';
-import '../Screens/PlayerScreen.dart';
-import '../Screens/ScoutScreen.dart';
+import 'package:insta_furbo/Screens/Parts/PlayerScreen.dart';
+import 'package:insta_furbo/Screens/Parts/ScoutScreen.dart';
 import 'dart:io';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key, required this.title});
-
-  final String title;
+  const RegisterScreen({
+    super.key,
+  });
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -39,12 +39,12 @@ class _RegisterScreenState extends State<RegisterScreen>
       child: Stack(children: <Widget>[
         CircleAvatar(
           radius: 80.0,
-          backgroundColor: Color.fromARGB(167, 226, 226, 226),
-          backgroundImage: AssetImage("assets/profile.jpeg"),
+          child: Icon(Icons.person, size: 100, color: Colors.white,),
+       
         ),
         Positioned(
-          bottom: 20.0,
-          right: 20.0,
+          bottom: 10.0,
+          right: 10.0,
           child: InkWell(
             onTap: () {
               showModalBottomSheet(
@@ -52,10 +52,14 @@ class _RegisterScreenState extends State<RegisterScreen>
                 builder: ((builder) => bottomSheet()),
               );
             },
-            child: Icon(
-              Icons.camera_alt,
-              color: Color.fromARGB(255, 54, 131, 57),
-              size: 28.0,
+            child: const CircleAvatar(
+              radius: 15,
+              backgroundColor: Colors.black,
+              child: Icon(
+                Icons.edit,
+                color: Colors.white,
+                size: 15.0,
+              ),
             ),
           ),
         ),
@@ -114,19 +118,21 @@ class _RegisterScreenState extends State<RegisterScreen>
 
   @override
   Widget build(BuildContext context) {
-    TabBar tabBar = new TabBar(
+    TabBar tabBar = TabBar(
+      
       controller: tabController,
-      tabs: [
-        new Tab(
+      tabs: const [
+        Tab(
           text: "JUGADOR",
         ),
-        new Tab(
+        Tab(
           text: "SCOUT",
         )
       ],
       labelColor: Colors.black,
     );
     TabBarView tabBarView = new TabBarView(
+
       controller: tabController,
       children: <Widget>[
         new PlayerScreen(),
@@ -135,41 +141,46 @@ class _RegisterScreenState extends State<RegisterScreen>
     );
 
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: Text('Registro'),
+        ),
         body: Container(
-      color: Colors.white,
-      child: Stack(
-        children: [
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Center(child: imageProfile()),
-
-                // ignore: prefer_const_constructors
-                SizedBox(height: 20),
-                // ignore: prefer_const_constructors
-                Text('Crea Tu Perfil',
-                    textAlign: TextAlign.center,
+          color: Colors.white,
+          child: ListView(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 50),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Center(child: imageProfile()),
                     // ignore: prefer_const_constructors
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 0, 0, 0),
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
-                // ignore: prefer_const_constructors
-                SizedBox(
-                    height: 40,
-                    child: Material(
-                      color: Colors.white,
-                      child: tabBar,
-                    )),
-                SizedBox(height: 350, child: tabBarView),
-              ],
-            ),
-          )
-        ],
-      ),
-    ));
+                    SizedBox(height: 30),
+                    // ignore: prefer_const_constructors
+                    Text('Crea Tu Perfil',
+                        textAlign: TextAlign.center,
+                        // ignore: prefer_const_constructors
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 0, 0, 0),
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold)),
+                    // ignore: prefer_const_constructors
+                    SizedBox(
+                        height: 50,
+                        child: Material(
+                          color: Colors.white,
+                          child: tabBar,
+                        )),
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height,
+                        child: tabBarView),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ));
 
     // This trailing comma makes auto-formatting nicer for build methods.);
   }
