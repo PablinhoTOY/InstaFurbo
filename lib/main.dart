@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:insta_furbo/pages/login.dart';
+import 'package:insta_furbo/pages/Register.dart';
 import './homepage.dart';
 
 void main() {
@@ -17,7 +17,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const LoginScreen(),
+      home: const RegisterScreen(
+        title: '',
+      ),
     );
   }
 }
