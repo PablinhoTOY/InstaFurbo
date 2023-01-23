@@ -4,6 +4,7 @@ import 'package:insta_furbo/homepage.dart';
 import 'package:insta_furbo/Screens/Parts/PlayerScreen.dart';
 import 'package:insta_furbo/Screens/Parts/ScoutScreen.dart';
 import 'dart:io';
+import 'package:insta_furbo/utils/colors.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({
@@ -40,11 +41,11 @@ class _RegisterScreenState extends State<RegisterScreen>
         CircleAvatar(
           radius: 80.0,
           child: Icon(Icons.person, size: 100, color: Colors.white,),
-       
+          backgroundColor: primaryColor,
         ),
         Positioned(
-          bottom: 10.0,
-          right: 10.0,
+          bottom: 2,
+          right: 2,
           child: InkWell(
             onTap: () {
               showModalBottomSheet(
@@ -53,12 +54,12 @@ class _RegisterScreenState extends State<RegisterScreen>
               );
             },
             child: const CircleAvatar(
-              radius: 15,
+              radius: 25,
               backgroundColor: Colors.black,
               child: Icon(
-                Icons.edit,
+                Icons.add_a_photo,
                 color: Colors.white,
-                size: 15.0,
+                size: 25.0,
               ),
             ),
           ),
@@ -119,7 +120,6 @@ class _RegisterScreenState extends State<RegisterScreen>
   @override
   Widget build(BuildContext context) {
     TabBar tabBar = TabBar(
-      
       controller: tabController,
       tabs: const [
         Tab(
@@ -130,9 +130,12 @@ class _RegisterScreenState extends State<RegisterScreen>
         )
       ],
       labelColor: Colors.black,
+      indicatorWeight: 4.0,
+      indicatorColor: primaryColor,
     );
     TabBarView tabBarView = new TabBarView(
-
+      
+      physics: const NeverScrollableScrollPhysics( ),
       controller: tabController,
       children: <Widget>[
         new PlayerScreen(),
@@ -150,7 +153,7 @@ class _RegisterScreenState extends State<RegisterScreen>
           child: ListView(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 50),
+                padding: EdgeInsets.fromLTRB(0,50,0,0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

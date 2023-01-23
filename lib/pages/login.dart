@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../homepage.dart';
 import 'package:insta_furbo/Pages/register.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -28,7 +29,11 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Icon(Icons.sports_soccer, size: 100, color: Colors.white,),
+              Icon(
+                Icons.sports_soccer,
+                size: 100,
+                color: Colors.white,
+              ),
               Text(
                 '¡Bienvenido!',
                 textAlign: TextAlign.center,
@@ -48,7 +53,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Colors.black,
                   ),
                   decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(vertical: 12.5, horizontal: 20),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 12.5, horizontal: 20),
                     icon: Icon(
                       Icons.supervised_user_circle_rounded,
                       color: Colors.white,
@@ -78,7 +84,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Colors.black,
                   ),
                   decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(vertical: 12.5, horizontal: 20),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 12.5, horizontal: 20),
                     icon: Icon(
                       Icons.password,
                       color: Colors.white,
@@ -143,7 +150,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontWeight: FontWeight.bold,
                       fontSize: 30),
                 ),
-                onTap: () => { Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterScreen(),))},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => RegisterScreen()));
+                },
               ),
             ],
           ),

@@ -38,7 +38,6 @@ class _QuestionFormState extends State<QuestionForm> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         margin: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height - 96,
           right: 16,
           left: 16,
         ),
@@ -147,9 +146,10 @@ class _QuestionFormState extends State<QuestionForm> {
                     } else {
                       showSnackbar(
                         success: false,
-                        text: 'Please fill all the required fields.',
+                        text: 'Porfavor llene todos los campos.',
                       );
                     }
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
                   },
                   child: const Text('Registrar'),
                 )

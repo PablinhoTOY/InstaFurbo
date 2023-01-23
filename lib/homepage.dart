@@ -4,7 +4,7 @@ import 'package:insta_furbo/Screens/profile.dart';
 import 'package:insta_furbo/Screens/search.dart';
 import 'package:insta_furbo/Screens/home.dart';
 import 'package:insta_furbo/Screens/setup.dart';
-
+import 'package:insta_furbo/utils/colors.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -29,7 +29,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('UnoFurbo', style: TextStyle(fontSize: 24))),
+      appBar: AppBar(
+        backgroundColor: primaryColor,
+        title: Text('UnoFurbo', style: TextStyle(fontSize: 24)),
+        automaticallyImplyLeading: false,
+      ),
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
@@ -53,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
                 backgroundColor: Colors.black,
                 currentIndex: _currentIndex,
-                selectedItemColor: Colors.green,
+                selectedItemColor: primaryColor,
                 unselectedItemColor: Colors.white,
                 showSelectedLabels: false,
                 showUnselectedLabels: false,
@@ -74,7 +78,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     backgroundColor: Colors.black,
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.abc, size: 0,),
+                    icon: Icon(
+                      Icons.abc,
+                      size: 0,
+                    ),
                     label: '',
                     backgroundColor: Colors.black,
                   ),
@@ -95,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterDocked,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: _currentIndex == 2 ? Colors.green[300] : Colors.green,
+        backgroundColor: _currentIndex == 2 ? Color.fromARGB(255, 71, 182, 75) : primaryColor,
         child:
             Icon(Icons.sports_soccer_rounded, size: 56.0, color: Colors.black),
         onPressed: () => setState(() {

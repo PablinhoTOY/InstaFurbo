@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:insta_furbo/Pages/login.dart';
 
 class PlayerScreen extends StatelessWidget {
   const PlayerScreen({Key? key}) : super(key: key);
@@ -62,6 +63,15 @@ class _FormularioState extends State<Formulario> {
     super.dispose();
   }
 
+  void _openMyPage() {
+    Navigator.push<void>(
+      context,
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => const LoginScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -71,7 +81,7 @@ class _FormularioState extends State<Formulario> {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Padding(
             padding: const EdgeInsets.all(32),
-            child: Column( children: [
+            child: Column(children: [
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Nombre *'),
                 validator: (v) =>
@@ -124,7 +134,7 @@ class _FormularioState extends State<Formulario> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 54, 131, 57),
                   ),
-                  onPressed: () {
+                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _question['value'] = _questionCtrl.text;
                       _question['options'] = _optionCtrls.asMap().entries.map(
@@ -145,9 +155,10 @@ class _FormularioState extends State<Formulario> {
                     } else {
                       showSnackbar(
                         success: false,
-                        text: 'Please fill all the required fields.',
+                        text: 'Porfavor llene todos los campos.',
                       );
                     }
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
                   },
                   child: const Text('Registrar'),
                 )

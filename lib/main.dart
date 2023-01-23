@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Pages/login.dart';
-import 'package:insta_furbo/pages/Register.dart';
-import './homepage.dart';
+import 'package:insta_furbo/utils/colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,9 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'U-BALL',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primaryColor: primaryColor,
       ),
       home: const LoginScreen(
     
