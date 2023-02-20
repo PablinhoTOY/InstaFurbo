@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'U-BALL',
       theme: ThemeData(
+        pageTransitionsTheme: pageTransitionsTheme,
         primaryColor: primaryColor,
       ),
       home: const LoginScreen(
@@ -24,3 +25,10 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+final pageTransitionsTheme = PageTransitionsTheme(
+  builders: <TargetPlatform, PageTransitionsBuilder>{
+    TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
+    TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+  },
+);

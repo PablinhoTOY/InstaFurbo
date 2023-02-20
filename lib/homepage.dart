@@ -102,7 +102,9 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterDocked,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: _currentIndex == 2 ? Color.fromARGB(255, 71, 182, 75) : primaryColor,
+        backgroundColor: _currentIndex == 2
+            ? Color.fromARGB(255, 71, 182, 75)
+            : primaryColor,
         child:
             Icon(Icons.sports_soccer_rounded, size: 56.0, color: Colors.black),
         onPressed: () => setState(() {

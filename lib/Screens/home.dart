@@ -1,12 +1,16 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_furbo/utils/colors.dart';
+
+
+
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: 1,
+      itemCount: 5,
       itemBuilder: (context, index) {
         return Column(
           children: [
