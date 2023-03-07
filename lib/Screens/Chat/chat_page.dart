@@ -30,55 +30,71 @@ class ChatPage extends StatelessWidget {
         ],
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const Expanded(
-            child: ChatInfo(),
-          ),
-          TextField(
-            cursorColor: primaryColor,
-            maxLines: null,
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Color.fromARGB(255, 88, 85, 85),
-              hintText: 'Type a message!',
-              hintStyle: TextStyle(
-                color: Colors.grey,
-              ),
-              prefixIcon: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30.0),
-                child: Icon(
-                  Icons.sports_soccer,
-                  color: Colors.grey,
-                ),
-              ),
-              suffixIcon: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
-                    Icon(
-                      Icons.camera_alt,
-                      color: Colors.grey,
+          const Expanded(child: ChatInfo()),
+          Container(
+            margin: EdgeInsets.all(15.0),
+            height: 70,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(35.0),
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(0, 3),
+                            blurRadius: 5,
+                            color: Colors.grey)
+                      ],
                     ),
-                    Icon(
-                      Icons.attach_file,
-                      color: Colors.grey,
+                    child: Row(
+                      children: [
+                        IconButton(
+                            icon: Icon(
+                              Icons.face,
+                              color: Colors.black,
+                            ),
+                            onPressed: () {}),
+                        Expanded(
+                          child: TextField(
+                            maxLines: null,
+                            cursorColor: primaryColor,
+                            decoration: InputDecoration(
+                                hintText: "Type Something...",
+                                hintStyle: TextStyle(color: Colors.black),
+                                border: InputBorder.none),
+                          ),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.photo_camera,
+                              color: Colors.black),
+                          onPressed: () {},
+                        ),
+                        IconButton(
+                          icon:
+                              Icon(Icons.attach_file, color: Colors.black),
+                          onPressed: () {},
+                        )
+                      ],
                     ),
-                    Icon(
-                      Icons.money,
-                      color: Colors.grey,
+                  ),
+                ),
+                SizedBox(width: 15),
+                Container(
+                  padding: const EdgeInsets.all(15.0),
+                  decoration: BoxDecoration(
+                      color: Colors.black, shape: BoxShape.circle),
+                  child: InkWell(
+                    child: Icon(
+                      Icons.keyboard_voice,
+                      color: Colors.white,
                     ),
-                  ],
-                ),
-              ),
-              border: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  width: 0,
-                  style: BorderStyle.none,
-                ),
-              ),
-              contentPadding: const EdgeInsets.all(15),
+                    onLongPress: () {},
+                  ),
+                )
+              ],
             ),
           ),
         ],

@@ -31,7 +31,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
-        title: Text('UnoFurbo', style: TextStyle(fontSize: 24)),
+        leading: Icon(Icons.sports_soccer_rounded, size: 42.0, color: Colors.black),
+        title: Text('UnoFurbo', style: TextStyle(fontSize: 24),),
         automaticallyImplyLeading: false,
       ),
       body: _pages[_currentIndex],

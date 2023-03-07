@@ -19,7 +19,7 @@ class MyMessageCard extends StatelessWidget {
         child: Card(
           elevation: 1,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          color: Colors.green,
+          color: Color.fromARGB(255, 153, 153, 153),
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 7.5),
           child: Stack(
             children: [

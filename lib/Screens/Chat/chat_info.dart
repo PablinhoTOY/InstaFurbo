@@ -9,7 +9,7 @@ class ChatInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     int a = 0;
     return ListView.builder(
-      itemCount: 6,
+      itemCount: 10,
       itemBuilder: (context, index) {
           while (a <= 2) {
             a++;
