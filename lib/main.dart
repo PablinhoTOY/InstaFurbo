@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_furbo/firebase_options.dart';
+import 'package:insta_furbo/pages/_login.dart';
+import 'package:insta_furbo/pages/welcomepage.dart';
 import 'Pages/login.dart';
 import 'package:insta_furbo/utils/colors.dart';
 
@@ -24,10 +26,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         pageTransitionsTheme: pageTransitionsTheme,
         primaryColor: primaryColor,
+        scaffoldBackgroundColor: secundaryColor,
+        inputDecorationTheme: InputDecorationTheme(
+          enabledBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: primaryColor)),
+        ),
       ),
-      home: const LoginScreen(
-    
-      ),
+      home: WelcomePage(),
     );
   }
 }
