@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:insta_furbo/firebase_options.dart';
 import 'package:insta_furbo/pages/_login.dart';
 import 'package:insta_furbo/pages/welcomepage.dart';
-import 'Pages/login.dart';
+
 import 'package:insta_furbo/utils/colors.dart';
 
 void main() async {

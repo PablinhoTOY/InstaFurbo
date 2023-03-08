@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:insta_furbo/Pages/login.dart';
+import 'package:insta_furbo/pages/_login.dart';
 
 class ScoutScreen extends StatelessWidget {
   const ScoutScreen({Key? key}) : super(key: key);
@@ -149,7 +149,11 @@ class _QuestionFormState extends State<QuestionForm> {
                         text: 'Porfavor llene todos los campos.',
                       );
                     }
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => userLogin(),
+                        ));
                   },
                   child: const Text('Registrar'),
                 )

@@ -327,10 +327,14 @@ class _registerScreen extends State<registerScreen>
                                         password: password.text,
                                         name: name.text,
                                         lastname: lastname.text,
-                                        UserType: Usertype
-                                        // file: file
-                                        );
+                                        UserType: Usertype,
+                                        file: _image!);
                                     print(res);
+
+                                    Navigator.pop(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => userLogin()));
                                   },
                                   child: Container(
                                     padding: EdgeInsets.all(16),
@@ -493,9 +497,8 @@ class _registerScreen extends State<registerScreen>
                                         password: password.text,
                                         name: name.text,
                                         lastname: lastname.text,
-                                        UserType: Usertype
-                                        // file: file
-                                        );
+                                        UserType: Usertype,
+                                        file: _image!);
                                     print(res);
                                     Navigator.push(
                                         context,
