@@ -12,14 +12,19 @@ class AuthMethods {
     required String password,
     required String name,
     required String lastname,
+    required String UserType,
+
     //required Uint8List file,
   }) async {
     String res = "Algun error ocurrio";
     try {
       if (email.isNotEmpty ||
-          password.isNotEmpty ||
-          name.isNotEmpty ||
-          lastname.isNotEmpty) {
+              password.isNotEmpty ||
+              name.isNotEmpty ||
+              lastname.isNotEmpty ||
+              UserType.isNotEmpty
+          // || file != null
+          ) {
         //registrar usuario
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
@@ -31,7 +36,10 @@ class AuthMethods {
           'E-mail': email,
           'Password': password,
           'Contacts': [],
+          'UserType': UserType,
+          //'file': file,
         });
+        res = "funcionó! :D";
       }
     } catch (err) {
       res = err.toString();

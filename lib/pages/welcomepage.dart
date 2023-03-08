@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:insta_furbo/Screens/home.dart';
 import 'package:insta_furbo/homepage.dart';
-import 'package:insta_furbo/pages/login.dart';
+
 import 'package:insta_furbo/utils/colors.dart';
 
 import '_login.dart';

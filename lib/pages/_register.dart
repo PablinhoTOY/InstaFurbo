@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:insta_furbo/Resources/auth_methods.dart';
 import 'package:insta_furbo/pages/_login.dart';
 
 import '../utils/colors.dart';
+import '../utils/utils.dart';
 
 class registerScreen extends StatefulWidget {
   @override
@@ -30,20 +33,23 @@ class _registerScreen extends State<registerScreen>
   TextEditingController lastname = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  String Usertype = "";
+  Uint8List? _image;
 
 //widgets---------------------------------------------
   Widget imageProfile() {
     return Center(
       child: Stack(children: <Widget>[
-        CircleAvatar(
-          radius: 80.0,
-          child: Icon(
-            Icons.person,
-            size: 100,
-            color: Colors.white,
-          ),
-          backgroundColor: primaryColor,
-        ),
+        _image != null
+            ? CircleAvatar(
+                radius: 80,
+                backgroundImage: MemoryImage(_image!),
+              )
+            : const CircleAvatar(
+                radius: 80.0,
+                backgroundImage: NetworkImage(
+                    'https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg'),
+              ),
         Positioned(
           bottom: 2,
           right: 2,
@@ -67,6 +73,13 @@ class _registerScreen extends State<registerScreen>
         ),
       ]),
     );
+  }
+
+  void selectImage() async {
+    Uint8List im = await pickImage(ImageSource.gallery);
+    setState(() {
+      _image = im;
+    });
   }
 
   Widget bottomSheet() {
@@ -106,7 +119,9 @@ class _registerScreen extends State<registerScreen>
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white, shadowColor: Colors.white),
               icon: Icon(Icons.image, size: 40, color: Colors.grey),
-              onPressed: () {},
+              onPressed: () {
+                selectImage();
+              },
               label: Text(
                 "Gallery",
                 style: TextStyle(color: Colors.grey, fontSize: 20),
@@ -306,13 +321,15 @@ class _registerScreen extends State<registerScreen>
                                 ),
                                 GestureDetector(
                                   onTap: () async {
+                                    Usertype = "Player";
                                     String res = await AuthMethods().signUpUser(
-                                      email: email.text,
-                                      password: password.text,
-                                      name: name.text,
-                                      lastname: lastname.text,
-                                      // file: file
-                                    );
+                                        email: email.text,
+                                        password: password.text,
+                                        name: name.text,
+                                        lastname: lastname.text,
+                                        UserType: Usertype
+                                        // file: file
+                                        );
                                     print(res);
                                   },
                                   child: Container(
@@ -469,10 +486,22 @@ class _registerScreen extends State<registerScreen>
                                   ),
                                 ),
                                 GestureDetector(
-                                  onTap: () => Navigator.pop(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return userLogin();
-                                  })),
+                                  onTap: () async {
+                                    Usertype = "Scout";
+                                    String res = await AuthMethods().signUpUser(
+                                        email: email.text,
+                                        password: password.text,
+                                        name: name.text,
+                                        lastname: lastname.text,
+                                        UserType: Usertype
+                                        // file: file
+                                        );
+                                    print(res);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (builder) => userLogin()));
+                                  },
                                   child: Container(
                                     padding: EdgeInsets.all(16),
                                     decoration: BoxDecoration(
