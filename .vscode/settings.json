@@ -32,5 +32,6 @@
     "**/.*/**",
     "**/.vscode",
     "**/.vscode/**"
-  ]
+  ],
+  "java.configuration.updateBuildConfiguration": "interactive"
 }

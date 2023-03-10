@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:insta_furbo/Pages/login.dart';
+import 'package:insta_furbo/pages/_login.dart';
 
 class PlayerScreen extends StatelessWidget {
   const PlayerScreen({Key? key}) : super(key: key);
@@ -66,7 +66,7 @@ class _FormularioState extends State<Formulario> {
     Navigator.push<void>(
       context,
       MaterialPageRoute<void>(
-        builder: (BuildContext context) => const LoginScreen(),
+        builder: (BuildContext context) => userLogin(),
       ),
     );
   }
@@ -133,7 +133,7 @@ class _FormularioState extends State<Formulario> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 54, 131, 57),
                   ),
-                   onPressed: () {
+                  onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _question['value'] = _questionCtrl.text;
                       _question['options'] = _optionCtrls.asMap().entries.map(
@@ -157,7 +157,11 @@ class _FormularioState extends State<Formulario> {
                         text: 'Porfavor llene todos los campos.',
                       );
                     }
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => userLogin(),
+                        ));
                   },
                   child: const Text('Registrar'),
                 )
