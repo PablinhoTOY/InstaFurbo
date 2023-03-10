@@ -35,9 +35,48 @@ class _registerScreen extends State<registerScreen>
   TextEditingController password = TextEditingController();
   String Usertype = "";
   Uint8List? _image;
+  bool isLoading = false;
 
 //widgets---------------------------------------------
-  Widget imageProfile() {
+  Widget imageProfilePlayer() {
+    return Center(
+      child: Stack(children: <Widget>[
+        _image != null
+            ? CircleAvatar(
+                radius: 80,
+                backgroundImage: MemoryImage(_image!),
+              )
+            : const CircleAvatar(
+                radius: 80.0,
+                backgroundImage: NetworkImage(
+                    'https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg'),
+              ),
+        Positioned(
+          bottom: 2,
+          right: 2,
+          child: InkWell(
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: ((builder) => bottomSheet()),
+              );
+            },
+            child: const CircleAvatar(
+              radius: 25,
+              backgroundColor: Colors.black,
+              child: Icon(
+                Icons.add_a_photo,
+                color: Colors.white,
+                size: 25.0,
+              ),
+            ),
+          ),
+        ),
+      ]),
+    );
+  }
+
+  Widget imageProfileScout() {
     return Center(
       child: Stack(children: <Widget>[
         _image != null
@@ -79,6 +118,12 @@ class _registerScreen extends State<registerScreen>
     Uint8List im = await pickImage(ImageSource.gallery);
     setState(() {
       _image = im;
+    });
+  }
+
+  void TabIsChanging() {
+    setState(() {
+      email.text = "";
     });
   }
 
@@ -187,6 +232,7 @@ class _registerScreen extends State<registerScreen>
                     ],
                   ),
                 ),
+
                 // tab bar view here
                 Expanded(
                   child: TabBarView(
@@ -198,7 +244,7 @@ class _registerScreen extends State<registerScreen>
                           Padding(
                             padding: const EdgeInsets.only(top: 60),
                             child: Center(
-                              child: imageProfile(),
+                              child: imageProfilePlayer(),
                             ),
                           ),
                           Row(
@@ -294,7 +340,9 @@ class _registerScreen extends State<registerScreen>
                             ],
                           ),
                           //botones
-
+                          SizedBox(
+                            height: 60,
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(14.0),
                             child: Row(
@@ -322,19 +370,38 @@ class _registerScreen extends State<registerScreen>
                                 GestureDetector(
                                   onTap: () async {
                                     Usertype = "Player";
-                                    String res = await AuthMethods().signUpUser(
-                                        email: email.text,
-                                        password: password.text,
-                                        name: name.text,
-                                        lastname: lastname.text,
-                                        UserType: Usertype,
-                                        file: _image!);
-                                    print(res);
-
-                                    Navigator.pop(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => userLogin()));
+                                    setState(() {
+                                      isLoading = true;
+                                    });
+                                    if (_image != null) {
+                                      String res = await AuthMethods()
+                                          .signUpUser(
+                                              email: email.text,
+                                              password: password.text,
+                                              name: name.text,
+                                              lastname: lastname.text,
+                                              UserType: Usertype,
+                                              file: _image!);
+                                      print(res);
+                                      setState(() {
+                                        isLoading = false;
+                                      });
+                                      if (res == "success") {
+                                        Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    userLogin()));
+                                      } else {
+                                        showSnackbar(res, context);
+                                      }
+                                    } else {
+                                      setState(() {
+                                        isLoading = false;
+                                      });
+                                      showSnackbar(
+                                          "Debe ingresar su Foto de Perfil",
+                                          context);
+                                    }
                                   },
                                   child: Container(
                                     padding: EdgeInsets.all(16),
@@ -350,10 +417,16 @@ class _registerScreen extends State<registerScreen>
                                         border: Border.all(
                                             color:
                                                 Colors.green.withOpacity(.5))),
-                                    child: Icon(
-                                      Icons.arrow_forward,
-                                      color: Colors.white,
-                                    ),
+                                    child: isLoading
+                                        ? Center(
+                                            child: CircularProgressIndicator(
+                                              color: Colors.white,
+                                            ),
+                                          )
+                                        : Icon(
+                                            Icons.arrow_forward,
+                                            color: Colors.white,
+                                          ),
                                   ),
                                 ),
                               ],
@@ -369,7 +442,7 @@ class _registerScreen extends State<registerScreen>
                           Padding(
                             padding: const EdgeInsets.only(top: 60),
                             child: Center(
-                              child: imageProfile(),
+                              child: imageProfileScout(),
                             ),
                           ),
                           Row(
@@ -464,7 +537,11 @@ class _registerScreen extends State<registerScreen>
                               )
                             ],
                           ),
+
                           //botones
+                          SizedBox(
+                            height: 60,
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(14.0),
                             child: Row(
@@ -492,18 +569,38 @@ class _registerScreen extends State<registerScreen>
                                 GestureDetector(
                                   onTap: () async {
                                     Usertype = "Scout";
-                                    String res = await AuthMethods().signUpUser(
-                                        email: email.text,
-                                        password: password.text,
-                                        name: name.text,
-                                        lastname: lastname.text,
-                                        UserType: Usertype,
-                                        file: _image!);
-                                    print(res);
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (builder) => userLogin()));
+                                    setState(() {
+                                      isLoading = true;
+                                    });
+                                    if (_image != null) {
+                                      String res = await AuthMethods()
+                                          .signUpUser(
+                                              email: email.text,
+                                              password: password.text,
+                                              name: name.text,
+                                              lastname: lastname.text,
+                                              UserType: Usertype,
+                                              file: _image!);
+                                      print(res);
+                                      setState(() {
+                                        isLoading = false;
+                                      });
+                                      if (res == "success") {
+                                        Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    userLogin()));
+                                      } else {
+                                        showSnackbar(res, context);
+                                      }
+                                    } else {
+                                      setState(() {
+                                        isLoading = false;
+                                      });
+                                      showSnackbar(
+                                          "Debe ingresar su Foto de Perfil",
+                                          context);
+                                    }
                                   },
                                   child: Container(
                                     padding: EdgeInsets.all(16),
@@ -519,10 +616,16 @@ class _registerScreen extends State<registerScreen>
                                         border: Border.all(
                                             color:
                                                 Colors.green.withOpacity(.5))),
-                                    child: Icon(
-                                      Icons.arrow_forward,
-                                      color: Colors.white,
-                                    ),
+                                    child: isLoading
+                                        ? Center(
+                                            child: CircularProgressIndicator(
+                                              color: Colors.white,
+                                            ),
+                                          )
+                                        : Icon(
+                                            Icons.arrow_forward,
+                                            color: Colors.white,
+                                          ),
                                   ),
                                 ),
                               ],

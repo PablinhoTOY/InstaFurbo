@@ -1,9 +1,8 @@
-import 'dart:html';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:insta_furbo/Resources/storage_methods.dart';
+import 'package:insta_furbo/models/user_data.dart' as model;
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -18,7 +17,7 @@ class AuthMethods {
     required String UserType,
     required Uint8List file,
   }) async {
-    String res = "Algun error ocurrio";
+    String res = "Ocurrio un Error";
     try {
       if (email.isNotEmpty ||
           password.isNotEmpty ||
@@ -34,26 +33,56 @@ class AuthMethods {
             .uploadImageToStorage('ProfileImages', file, false);
 
         //añadir usuario a la base de datos
-        await _firestore.collection('user').doc(cred.user!.uid).set({
-          'Uid': cred.user!.uid,
-          'Username': name,
-          'Lastname': lastname,
-          'E-mail': email,
-          'Password': password,
-          'Contacts': [],
-          'UserType': UserType,
-          'photoUrl': photoURl,
-        });
-        res = "funcionó! :D";
+
+        model.user User = model.user(
+          uid: cred.user!.uid,
+          name: name,
+          lastname: lastname,
+          email: email,
+          password: password,
+          contacts: [],
+          userType: UserType,
+          photo: photoURl,
+        );
+
+        await _firestore.collection('user').doc(cred.user!.uid).set(
+              User.toJson(),
+            );
+        res = "success";
+      } else {
+        res = "Ingrese Todos los Campos";
       }
     } on FirebaseAuthException catch (err) {
       if (err.code == 'invalid-email') {
         res = 'The mail is badly formated';
       } else if (err.code == 'weak-password') {
         res = 'la contraseña debe tener mas de 6 caracteres';
+      } else {
+        res = err.toString();
       }
+    }
+    return res;
+  }
 
-      res = err.toString();
+//Autenticacion del usuario
+
+  Future<String> loginUser({
+    required email,
+    required password,
+  }) async {
+    String res = "Ocurrio un Error";
+    try {
+      if (email.isNotEmpty || password.isNotEmpty) {
+        await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+        res = "success";
+      } else {
+        res = "Ingrese Todos los Campos";
+      }
+    } on FirebaseAuthException catch (err) {
+      if (err.code == 'wrong-password') {
+        res = "contraseña incorrecta";
+      }
     }
     return res;
   }
