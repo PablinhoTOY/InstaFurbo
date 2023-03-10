@@ -40,7 +40,11 @@ class _RegisterScreenState extends State<RegisterScreen>
       child: Stack(children: <Widget>[
         CircleAvatar(
           radius: 80.0,
-          child: Icon(Icons.person, size: 100, color: Colors.white,),
+          child: Icon(
+            Icons.person,
+            size: 100,
+            color: Colors.white,
+          ),
           backgroundColor: primaryColor,
         ),
         Positioned(
@@ -134,8 +138,7 @@ class _RegisterScreenState extends State<RegisterScreen>
       indicatorColor: primaryColor,
     );
     TabBarView tabBarView = new TabBarView(
-      
-      physics: const NeverScrollableScrollPhysics( ),
+      physics: const NeverScrollableScrollPhysics(),
       controller: tabController,
       children: <Widget>[
         new PlayerScreen(),
@@ -153,7 +156,7 @@ class _RegisterScreenState extends State<RegisterScreen>
           child: ListView(
             children: [
               Padding(
-                padding: EdgeInsets.fromLTRB(0,50,0,0),
+                padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

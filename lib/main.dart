@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         pageTransitionsTheme: pageTransitionsTheme,
         primaryColor: primaryColor,
+        
       ),
       home: const LoginScreen(
     
