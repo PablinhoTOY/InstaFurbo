@@ -45,7 +45,11 @@ dependencies:
   animated_text_kit: ^4.2.2
   flutter_slidable: ^2.0.0
   image_picker: ^0.8.6+4
+<<<<<<< HEAD
   provider: ^6.0.5
+=======
+  flutter_riverpod: ^2.3.2
+>>>>>>> aad0e2996a5892230b78df8029223f87e72ee2b9
 
 dev_dependencies:
   flutter_test:
