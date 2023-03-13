@@ -32,83 +32,85 @@ class _ProfileScreenState extends State<ProfileScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        scrollDirection: Axis.vertical,
-        children: [
-          PerfilTop(),
-          PerfilBottom(),
-        ],
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              backgroundColor: primaryColor,
+              automaticallyImplyLeading: false,
+              toolbarHeight: 0,
+              collapsedHeight: 0,
+              pinned: true,
+              expandedHeight: MediaQuery.of(context).size.height / 3,
+              flexibleSpace: FlexibleSpaceBar(
+                  collapseMode: CollapseMode.parallax,
+                  background: Container(
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('lib/Assets/img/canchita.png'),
+                          fit: BoxFit.cover),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        CircleAvatar(
+                          radius: 60,
+                          backgroundColor: Colors.white,
+                          child: CircleAvatar(
+                            radius: 55,
+                            foregroundImage:
+                                NetworkImage('https://i.imgur.com/jeoaplb.jpg'),
+                          ),
+                        ),
+                        Text('"Nombre panacota"',
+                            style: TextStyle(
+                                fontSize: 24,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
+                        Text('Scout',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold))
+                      ],
+                    ),
+                  )),
+              bottom: TabBar(
+                controller: _tabController,
+                isScrollable: false,
+                labelStyle: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                    color: Colors.white),
+                indicatorColor: Colors.white,
+                indicatorSize: TabBarIndicatorSize.tab,
+                indicatorWeight: 4,
+                tabs: [Tab(text: 'Informacion Deportiva'), Tab(text: 'Media')],
+              ),
+            ),
+            SliverToBoxAdapter(
+                child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  FirstScreen(),
+                  SecondScreen(),
+                ],
+              ),
+            )),
+          ],
+        ),
       ),
     );
   }
 
-  Widget PerfilBottom() {
-    return Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-      Container(
-        color: primaryColor,
+  Widget PerfilTop() {
+    return SliverToBoxAdapter(
+      child: Container(
         width: MediaQuery.of(context).size.width,
-        alignment: Alignment.center,
-        child: TabBar(
-          controller: _tabController,
-          isScrollable: true,
-          labelStyle: TextStyle(
-              fontWeight: FontWeight.w500, fontSize: 14, color: Colors.white),
-          indicatorColor: Colors.white,
-          indicatorSize: TabBarIndicatorSize.label,
-          indicatorWeight: 4,
-          tabs: [Tab(text: 'Informacion Deportiva'), Tab(text: 'Media')],
-        ),
-      ),
-      Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: TabBarView(
-          controller: _tabController,
-          children: [
-            FirstScreen(),
-            SecondScreen(),
-          ],
-        ),
-      )
-    ]);
-  }
-}
-
-class PerfilTop extends StatelessWidget {
-  const PerfilTop({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height / 3,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('lib/Assets/img/canchita.png'),
-            fit: BoxFit.cover),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          CircleAvatar(
-            radius: 60,
-            backgroundColor: Colors.white,
-            child: CircleAvatar(
-              radius: 55,
-              foregroundImage: NetworkImage('https://i.imgur.com/jeoaplb.jpg'),
-            ),
-          ),
-          Text('"Nombre panacota"',
-              style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold)),
-          Text('Scout',
-              style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold))
-        ],
+        height: MediaQuery.of(context).size.height / 3,
       ),
     );
   }
@@ -120,7 +122,7 @@ class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height/1.5,
+        height: MediaQuery.of(context).size.height / 1.5,
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(
             'It is a contact tab, which is responsible for displaying the contacts stored in your mobile',
@@ -175,27 +177,25 @@ class _SecondScreenState extends State<SecondScreen> {
         child: CircularProgressIndicator(),
       );
     }
-    return 
-    Container(
-      
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-        ),
-        itemBuilder: (context, index) => GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => ImagePage(ids[index]),
-              ),
-            );
-          },
-          child: Image.network(
-            'https://picsum.photos/id/${ids[index]}/300/300',
-          ),
-        ),
-        itemCount: ids.length,
+    return GridView.builder(
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
       ),
+      itemBuilder: (context, index) => GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ImagePage(ids[index]),
+            ),
+          );
+        },
+        child: Image.network(
+          'https://picsum.photos/id/${ids[index]}/300/300',
+        ),
+      ),
+      itemCount: ids.length,
     );
   }
 }

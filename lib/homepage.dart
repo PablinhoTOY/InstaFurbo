@@ -11,6 +11,7 @@ import 'package:insta_furbo/Screens/setup.dart';
 import 'package:insta_furbo/models/user_data.dart' as model;
 import 'package:insta_furbo/utils/colors.dart';
 import 'package:provider/provider.dart';
+import 'package:insta_furbo/pages/uploadMedia.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -22,6 +23,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
   List<Widget> _pages = [];
+  bool appbarPin = true;
+
   @override
   void initState() {
     _pages.add(HomeScreen());
@@ -32,11 +35,17 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     String _name = "";
     String _email = "";
+
+    if (_currentIndex != 4) {
+      appbarPin = true;
+    } else {
+      appbarPin = false;
+    }
+
     try {
       model.user user = Provider.of<UserProvider>(context).getUser;
       _name = user.name;
@@ -52,12 +61,21 @@ class _MyHomePageState extends State<MyHomePage> {
             return <Widget>[
               SliverAppBar(
                 backgroundColor: primaryColor,
-                leading: IconButton(
-                    icon: Icon(Icons.sports_soccer_rounded,
-                        size: 42.0, color: Color.fromARGB(255, 255, 255, 255)),
-                    onPressed: () => Scaffold.of(context).openDrawer()),
+                automaticallyImplyLeading: false,
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: InkWell(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CircleAvatar(),
+                      ),
+                      onTap: () => Scaffold.of(context).openDrawer(),
+                    ),
+                  ),
+                ],
                 title: Text('Uno-furbo'),
-                pinned: true,
+                pinned: appbarPin,
                 floating: true,
                 forceElevated: innerBoxIsScrolled,
               )
@@ -194,9 +212,10 @@ class _MyHomePageState extends State<MyHomePage> {
             : primaryColor,
         child: Icon(Icons.sports_soccer_rounded,
             size: 56.0, color: Color.fromARGB(255, 255, 255, 255)),
-        onPressed: () => setState(() {
-          _currentIndex = 2;
-        }),
+        onPressed: () => {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => UploadMedia()))
+        },
       ),
     );
   }
