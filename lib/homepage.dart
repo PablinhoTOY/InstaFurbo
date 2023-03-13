@@ -26,16 +26,79 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: primaryColor,
-        leading: Icon(Icons.sports_soccer_rounded, size: 42.0, color: Colors.black),
-        title: Text('UnoFurbo', style: TextStyle(fontSize: 24),),
-        automaticallyImplyLeading: false,
+      body: SafeArea(
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                backgroundColor: primaryColor,
+                leading: IconButton(
+                    icon: Icon(Icons.sports_soccer_rounded,
+                        size: 42.0, color: Colors.black),
+                    onPressed: () => Scaffold.of(context).openDrawer()),
+                title: Text('Uno-furbo'),
+                pinned: true,
+                floating: true,
+                forceElevated: innerBoxIsScrolled,
+              )
+            ];
+          },
+          body: _pages[_currentIndex],
+        ),
       ),
-      body: _pages[_currentIndex],
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                color: primaryColor,
+              ),
+              accountEmail: Text('"Email de la persona"',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 0, 0, 0))),
+              accountName: Text('"Nombre de la persona"',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              currentAccountPicture: FlutterLogo(),
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.home,
+              ),
+              title: const Text('Pagina 1'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.train,
+              ),
+              title: const Text('Pagina 2'),
+              onTap: () {},
+            ),
+            const AboutListTile(
+              icon: Icon(
+                Icons.info,
+              ),
+              applicationIcon: Icon(
+                Icons.local_play,
+              ),
+              applicationName: 'Uno-Furbo',
+              applicationLegalese: '© 2023 Macintosh Inc',
+              applicationVersion: '1.0.1',
+              aboutBoxChildren: [Text('\nJolel es gei xd')],
+              child: Text('Sobre esta aplicacion'),
+            ),
+          ],
+        ),
+      ),
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         notchMargin: 6.0,
