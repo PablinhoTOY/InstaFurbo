@@ -81,7 +81,7 @@ class PerfilTop extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height / 3.5,
+      height: MediaQuery.of(context).size.height / 3,
       decoration: const BoxDecoration(
         image: DecorationImage(
             image: AssetImage('lib/Assets/img/canchita.png'),
@@ -120,8 +120,8 @@ class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height,
-        child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+        height: MediaQuery.of(context).size.height/1.5,
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(
             'It is a contact tab, which is responsible for displaying the contacts stored in your mobile',
             style: TextStyle(

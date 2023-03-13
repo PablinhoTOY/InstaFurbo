@@ -26,6 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,10 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
               applicationName: 'Uno-Furbo',
               applicationLegalese: '© 2023 Macintosh Inc',
               applicationVersion: '1.0.1',
-              aboutBoxChildren: [
-                Text(
-                    '\nJolel es gei xd')
-              ],
+              aboutBoxChildren: [Text('\nJolel es gei xd')],
               child: Text('Sobre esta aplicacion'),
             ),
           ],

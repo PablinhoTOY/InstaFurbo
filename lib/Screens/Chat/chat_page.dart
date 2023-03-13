@@ -88,7 +88,8 @@ class ChatPage extends StatelessWidget {
                       color: Colors.black, shape: BoxShape.circle),
                   child: InkWell(
                     child: Icon(
-                      Icons.keyboard_voice,
+                      Icons.send,
+                
                       color: Colors.white,
                     ),
                     onLongPress: () {},
