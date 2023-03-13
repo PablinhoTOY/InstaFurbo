@@ -24,6 +24,9 @@ class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
   List<Widget> _pages = [];
   bool appbarPin = true;
+  String _name = "";
+  String _email = "";
+  String _image = "";
 
   @override
   void initState() {
@@ -37,9 +40,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    String _name = "";
-    String _email = "";
-
     if (_currentIndex != 4) {
       appbarPin = true;
     } else {
@@ -50,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
       model.user user = Provider.of<UserProvider>(context).getUser;
       _name = user.name;
       _email = user.email;
+      _image = user.photo;
     } catch (err) {
       print(err.toString());
     }
@@ -60,7 +61,8 @@ class _MyHomePageState extends State<MyHomePage> {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                backgroundColor: primaryColor,
+                backgroundColor: Colors.white,
+                shadowColor: Colors.white,
                 automaticallyImplyLeading: false,
                 actions: [
                   Padding(
@@ -68,13 +70,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: InkWell(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: CircleAvatar(),
+                        child:
+                            CircleAvatar(backgroundImage: NetworkImage(_image)),
                       ),
                       onTap: () => Scaffold.of(context).openDrawer(),
                     ),
                   ),
                 ],
-                title: Text('Uno-furbo'),
+                title: Text(
+                  'U-BALL',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30),
+                ),
                 pinned: appbarPin,
                 floating: true,
                 forceElevated: innerBoxIsScrolled,
@@ -103,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   CircleAvatar(
                     radius: 80,
-                    backgroundImage: NetworkImage(''),
+                    backgroundImage: NetworkImage(_image),
                   )
                 ],
               ),
@@ -214,7 +223,7 @@ class _MyHomePageState extends State<MyHomePage> {
             size: 56.0, color: Color.fromARGB(255, 255, 255, 255)),
         onPressed: () => {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => UploadMedia()))
+              context, MaterialPageRoute(builder: (context) => SetupScreen()))
         },
       ),
     );

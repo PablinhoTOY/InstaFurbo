@@ -2,9 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_furbo/utils/colors.dart';
 
-
-
-
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -18,8 +15,8 @@ class HomeScreen extends StatelessWidget {
               // boundary needed for web
               decoration: BoxDecoration(
                 border: Border.symmetric(
-                  horizontal: BorderSide(color: Colors.black)
-                ),
+                    horizontal:
+                        BorderSide(color: Color.fromARGB(255, 255, 255, 255))),
                 color: Colors.white,
               ),
               padding: const EdgeInsets.symmetric(
@@ -37,8 +34,8 @@ class HomeScreen extends StatelessWidget {
                       children: <Widget>[
                         CircleAvatar(
                           radius: 18,
-                          backgroundImage: NetworkImage(
-                              'https://i.imgur.com/jeoaplb.jpg'),
+                          backgroundImage:
+                              NetworkImage('https://i.imgur.com/jeoaplb.jpg'),
                         ),
                         Expanded(
                           child: Padding(
@@ -104,7 +101,7 @@ class HomeScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       children: [
                         SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.40,
+                          height: MediaQuery.of(context).size.height * 0.30,
                           width: double.infinity,
                           child: Image.network(
                             'https://img.freepik.com/foto-gratis/jugadores-futbol-accion-estadio-profesional_654080-1194.jpg?w=2000',
