@@ -33,6 +33,7 @@ class _registerScreen extends State<registerScreen>
   TextEditingController lastname = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController nickname = TextEditingController();
   String Usertype = "";
   Uint8List? _image;
   bool isLoading = false;
@@ -339,6 +340,31 @@ class _registerScreen extends State<registerScreen>
                               )
                             ],
                           ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(right: 16),
+                                child: Icon(
+                                  Icons.verified_user,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Expanded(
+                                child: TextField(
+                                  controller: nickname,
+                                  style: TextStyle(
+                                      color:
+                                          Color.fromARGB(255, 255, 255, 255)),
+                                  decoration: InputDecoration(
+                                      hintText: 'Your Nickname!',
+                                      hintStyle: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 184, 184, 184))),
+                                ),
+                              )
+                            ],
+                          ),
                           //botones
                           SizedBox(
                             height: 60,
@@ -381,6 +407,7 @@ class _registerScreen extends State<registerScreen>
                                               name: name.text,
                                               lastname: lastname.text,
                                               UserType: Usertype,
+                                              nickname: nickname.text,
                                               file: _image!);
                                       print(res);
                                       setState(() {
@@ -537,7 +564,31 @@ class _registerScreen extends State<registerScreen>
                               )
                             ],
                           ),
-
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(right: 16),
+                                child: Icon(
+                                  Icons.verified_user,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Expanded(
+                                child: TextField(
+                                  controller: nickname,
+                                  style: TextStyle(
+                                      color:
+                                          Color.fromARGB(255, 255, 255, 255)),
+                                  decoration: InputDecoration(
+                                      hintText: 'Your Nickname!',
+                                      hintStyle: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 184, 184, 184))),
+                                ),
+                              )
+                            ],
+                          ),
                           //botones
                           SizedBox(
                             height: 60,
@@ -580,6 +631,7 @@ class _registerScreen extends State<registerScreen>
                                               name: name.text,
                                               lastname: lastname.text,
                                               UserType: Usertype,
+                                              nickname: nickname.text,
                                               file: _image!);
                                       print(res);
                                       setState(() {

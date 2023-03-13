@@ -1,10 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:insta_furbo/Providers/user_provider.dart';
 import 'package:insta_furbo/Screens/chat.dart';
 import 'package:insta_furbo/Screens/profile.dart';
 import 'package:insta_furbo/Screens/search.dart';
 import 'package:insta_furbo/Screens/home.dart';
 import 'package:insta_furbo/Screens/setup.dart';
+import 'package:insta_furbo/models/user_data.dart' as model;
 import 'package:insta_furbo/utils/colors.dart';
+import 'package:provider/provider.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -28,6 +34,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    String _name = "";
+    String _email = "";
+    try {
+      model.user user = Provider.of<UserProvider>(context).getUser;
+      _name = user.name;
+      _email = user.email;
+    } catch (err) {
+      print(err.toString());
+    }
+
     return Scaffold(
       body: SafeArea(
         child: NestedScrollView(
@@ -37,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 backgroundColor: primaryColor,
                 leading: IconButton(
                     icon: Icon(Icons.sports_soccer_rounded,
-                        size: 42.0, color: Colors.black),
+                        size: 42.0, color: Color.fromARGB(255, 255, 255, 255)),
                     onPressed: () => Scaffold.of(context).openDrawer()),
                 title: Text('Uno-furbo'),
                 pinned: true,
@@ -54,17 +70,24 @@ class _MyHomePageState extends State<MyHomePage> {
           // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: [
-            const UserAccountsDrawerHeader(
+            UserAccountsDrawerHeader(
               decoration: BoxDecoration(
                 color: primaryColor,
               ),
-              accountEmail: Text('"Email de la persona"',
+              accountEmail: Text(_email,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Color.fromARGB(255, 0, 0, 0))),
-              accountName: Text('"Nombre de la persona"',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
-              currentAccountPicture: FlutterLogo(),
+              accountName:
+                  Text(_name, style: TextStyle(fontWeight: FontWeight.bold)),
+              currentAccountPicture: Stack(
+                children: <Widget>[
+                  CircleAvatar(
+                    radius: 80,
+                    backgroundImage: NetworkImage(''),
+                  )
+                ],
+              ),
             ),
             ListTile(
               leading: const Icon(
@@ -92,10 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
               applicationName: 'Uno-Furbo',
               applicationLegalese: '© 2023 Macintosh Inc',
               applicationVersion: '1.0.1',
-              aboutBoxChildren: [
-                Text(
-                    '\nJolel es gei xd')
-              ],
+              aboutBoxChildren: [Text('\nJolel es gei xd')],
               child: Text('Sobre esta aplicacion'),
             ),
           ],
@@ -171,8 +191,8 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: _currentIndex == 2
             ? Color.fromARGB(255, 71, 182, 75)
             : primaryColor,
-        child:
-            Icon(Icons.sports_soccer_rounded, size: 56.0, color: Colors.black),
+        child: Icon(Icons.sports_soccer_rounded,
+            size: 56.0, color: Color.fromARGB(255, 255, 255, 255)),
         onPressed: () => setState(() {
           _currentIndex = 2;
         }),

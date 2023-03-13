@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:insta_furbo/utils/colors.dart';
 
-class SetupScreen extends StatelessWidget {
+class SetupScreen extends StatefulWidget {
+  @override
+  State<SetupScreen> createState() => _SetupScreenState();
+}
+
+class _SetupScreenState extends State<SetupScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      child: Center(child: Text('subir multimedia')),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: primaryColor,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {},
+        ),
+      ),
     );
   }
 }
