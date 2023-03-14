@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:insta_furbo/Providers/user_provider.dart';
 import 'package:insta_furbo/Screens/chat.dart';
 import 'package:insta_furbo/Screens/profile.dart';
@@ -10,8 +12,8 @@ import 'package:insta_furbo/Screens/home.dart';
 import 'package:insta_furbo/Screens/setup.dart';
 import 'package:insta_furbo/models/user_data.dart' as model;
 import 'package:insta_furbo/utils/colors.dart';
+import 'package:insta_furbo/utils/utils.dart';
 import 'package:provider/provider.dart';
-import 'package:insta_furbo/pages/uploadMedia.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -32,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     _pages.add(HomeScreen());
     _pages.add(SearchScreen());
-    _pages.add(SetupScreen());
+    _pages.add(SetupScreen(this._image));
     _pages.add(ChatScreen());
     _pages.add(ProfileScreen());
     super.initState();
@@ -222,8 +224,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.sports_soccer_rounded,
             size: 56.0, color: Color.fromARGB(255, 255, 255, 255)),
         onPressed: () => {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => SetupScreen()))
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => SetupScreen(_image)))
         },
       ),
     );
